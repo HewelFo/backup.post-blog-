@@ -1,7 +1,7 @@
-name: update blog-ci
+name: update blog
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -18,11 +18,11 @@ jobs:
       run: |
         cd source
         rm -rf _posts
-        git clone https://github.com/Fuhrerh-Lemon/source-blog _posts
+        git clone https://github.com/HewelFo/backup.post-blog-.git _posts
         cd ..
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3.8.2
       with:
         delete-branch: true
-        branch: blog_md/update
+        branch: update-source-blog
         token: ${{ secrets.GH_TOKEN }}
