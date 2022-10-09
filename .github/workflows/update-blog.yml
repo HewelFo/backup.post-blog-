@@ -1,24 +1,28 @@
 name: update blog
+
 on:
+  schedule:
+    - cron: '0 23 * * *'
+  workflow_dispatch:
   push:
     branches: [ main ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3.1.0
       with:
         submodules: true
-        repository: Fuhrerh-Lemon/akashi-ai-blog
+        repository: fuhrerh-lemon/akashi-ai-blog
         
     - name: update source-blog
       run: |
         cd source
         rm -rf _posts
-        git clone https://github.com/HewelFo/backup.post-blog-.git _posts
+        git clone https://github.com/Fuhrerh-Lemon/akashi-ai-blog.git _posts
         cd ..
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3.8.2
